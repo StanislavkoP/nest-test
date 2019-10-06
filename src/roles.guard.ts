@@ -31,7 +31,6 @@ export class AdminRoleGuard implements CanActivate {
         const user = request.user;
         const hasRole = () => user.roles.some((role) => roles.includes(role));
         
-        if (request.route.path === '/admin/login') return true;
         return user && user.roles && hasRole();
     }
 }

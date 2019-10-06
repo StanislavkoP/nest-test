@@ -6,20 +6,8 @@ export class AuthExceptionFilter implements ExceptionFilter {
         const ctx = host.switchToHttp();
         const response = ctx.getResponse();
         const request = ctx.getRequest();
-
         const status = exception.getStatus();
-
-
         
-        if (request.route.path === '/admin/login') {
-            response
-  .status(status)
-  .send('Hello');
-        } else {
-            response.redirect('/admin/login')
-        }
-        
-
-        // if (exception instanceof )
+        if (status === 401) response.redirect('/admin/login')
     }
 }

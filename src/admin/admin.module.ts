@@ -1,22 +1,12 @@
 import { Module, MiddlewareConsumer, HttpStatus } from '@nestjs/common';
 import { AdminController } from './admin.controller';
+import { AuthModule } from '../auth/auth.module';
+import { UserService } from '../user/user.service';
+import { UserModule } from '../user/user.module';
 
 @Module({
-  controllers: [AdminController]
+  controllers: [AdminController],
+  providers: [UserService],
+  imports: [AuthModule, UserModule]
 })
-export class AdminModule {
-  // configure(consumer: MiddlewareConsumer) {
-  //   consumer.apply(checkIsAuth).forRoutes(AdminController);
-  // }
-}
-
-function checkIsAuth(req, res, next) {
-  if (req.user || req.route.path === '/admin/login') {
-    next();
-  
-  } else {
-    res.redirect(HttpStatus.MOVED_PERMANENTLY, '/admin/login')
-  
-  }
-
-};
+export class AdminModule {}
