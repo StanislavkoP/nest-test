@@ -28,6 +28,7 @@
     "@nestjs/platform-express": "^6.7.2",
     "class-transformer": "^0.2.3",
     "class-validator": "^0.10.1",
+    "express-session": "^1.16.2",
     "hbs": "^4.0.5",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
