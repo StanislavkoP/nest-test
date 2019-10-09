@@ -18,6 +18,7 @@ async function bootstrap() {
   app.use(
     session({
       secret: 'nest cats',
+      cookie: {maxAge: 1000 * 60 * 60},
       resave: false,
       saveUninitialized: false,
     }),

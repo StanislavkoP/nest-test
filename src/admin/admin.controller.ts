@@ -5,18 +5,21 @@ import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from '../auth/auth.service';
 import { AuthExceptionFilter } from './admin.exception';
 import { LoginGuard, AuthenticatedGuard } from '../auth/login.guard';
+import {User} from '../user/user.service'
 
 @Controller('admin')
 @UseFilters(AuthExceptionFilter)
 export class AdminController {
-    // constructor(private readonly authService: AuthService) {}
-
-    // @UseGuards(AuthGuard('jwt'))
     @Get()
     @UseGuards(AuthenticatedGuard)
     @Render('pages/admin')
-    root(@Req() req: Request) {
-        return {}
+    root(@Res() res: Response, @Req() req: Request) {
+        // const user : User = req.user.role
+        // console.log(req.user.role)
+        // return res.json({user: req.user})
+        return {
+            user: req.user
+        }
     }
 
     @Get('login')
@@ -29,15 +32,5 @@ export class AdminController {
     @UseGuards(LoginGuard)
     async login(@Res() res: Response, @Req() req: Request) {
         res.redirect('/admin')
-        // const user = await this.authService.validateUser(req.body.login , req.body.password);
-
-        // if (user) {
-        //     const authUser = await this.authService.login({username: user.username, userId: user.userId, password: req.body.password})
-            
-        //     return res.json({
-        //         ...user,
-        //         ...authUser
-        //     });
-        // }
     }
 }

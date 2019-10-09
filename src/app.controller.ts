@@ -7,7 +7,6 @@ import { AuthGuard } from '@nestjs/passport';
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @UseGuards(AuthGuard('jwt'))
   @Get()
   @Render('index')
   root () {
