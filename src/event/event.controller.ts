@@ -12,19 +12,15 @@ export class EventController {
     constructor(private readonly eventService: EventService) {}
 
     @Post('/registration')
-    // @UsePipes(new ValidationPipe({
-    //     validationError : {
-    //         target: true
-    //     }
-    // }))
     @Render('index')
     async registerNewPerson(@Body() newPersonRegistration: registrationAtEventDto, @Res() res: Response) {
-        const errors = await this.eventService.validateStep(newPersonRegistration);
         const {
             step,
 
         } = newPersonRegistration;
 
+        const errors = await this.eventService.validateStep(newPersonRegistration);
+        console.log(errors)
         if (Object.keys(errors).length > 0) {
             return {
                 registrationStep: parseInt(step),
@@ -36,6 +32,7 @@ export class EventController {
         }
 
         
+
         this.eventService.registeringNewPerson(newPersonRegistration);
         this.eventService.step = parseInt(step);
         

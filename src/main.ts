@@ -1,12 +1,10 @@
 import { NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import * as session from 'express-session';
-import * as express from 'express';
 import { join } from 'path';
 import { AppModule } from './app.module';
 import * as hbs from 'hbs';
 import * as passport from 'passport';
-import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
@@ -45,7 +43,9 @@ async function bootstrap() {
   app.use(
     session({
       secret: 'nest cats',
-      cookie: {maxAge: 1000 * 60 * 60},
+      cookie: {
+        maxAge: 1000 * 60 * 60
+      },
       resave: false,
       saveUninitialized: false,
     }),

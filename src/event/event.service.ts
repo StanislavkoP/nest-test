@@ -53,13 +53,9 @@ export class EventService {
         const userLastName = this._registeringPerson.lastName;
         const userEmail = this._registeringPerson.email;
 
-        // console.log(object)
-
         if (userName && userLastName && userEmail && dateArrivale && dateDeparture && companyName && positionCompany && role && sex && birthdate && country) {
             return 3
         }
-
-
 
         if (userName && userLastName && userEmail) {
             return 2;
@@ -74,7 +70,6 @@ export class EventService {
 
     async validateStep(payload) {
         let step = new registrationAtEventDto();
-
         for (const key in payload) {
             if (payload.hasOwnProperty(key)) {
                 step[key] = payload[key]

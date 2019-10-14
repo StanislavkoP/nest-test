@@ -1,6 +1,8 @@
-import { IsNotEmpty, IsEmail } from 'class-validator';
+import { IsNotEmpty, IsEmail, registerDecorator, ValidationOptions, ValidatorConstraint, ValidatorConstraintInterface, ValidationArguments } from 'class-validator';
+import { toDate } from 'date-fns';
 
 export class registrationAtEventDto {
+    step: string;
 
     @IsNotEmpty({
         message: 'Please, fill it'
@@ -17,7 +19,29 @@ export class registrationAtEventDto {
     })
     email: string;
 
-    @IsNotEmpty()
-    step: string;
+    @IsDateStringCustom()
+    timeArrival: string;
+}
 
-} 
+
+
+
+@ValidatorConstraint({ async: true })
+class IsDateStringCustomConstraint implements ValidatorConstraintInterface {
+    validate(date: any, args: ValidationArguments) {
+        console.log(date)
+        return true
+    }
+}
+
+function IsDateStringCustom(validationOptions?: ValidationOptions) {
+    return function (object: Object, propertyName: string) {
+        registerDecorator({
+            target: object.constructor,
+            propertyName: propertyName,
+            options: validationOptions,
+            validator: IsDateStringCustomConstraint,
+            constraints: [],
+        });
+    };
+ }

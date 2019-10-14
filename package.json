@@ -29,6 +29,7 @@
     "air-datepicker": "^2.2.3",
     "class-transformer": "^0.2.3",
     "class-validator": "^0.10.1",
+    "date-fns": "^2.4.1",
     "express-hbs": "^2.1.2",
     "express-session": "^1.16.2",
     "hbs": "^4.0.5",
