@@ -1,0 +1,138 @@
+{{> header }}
+<div align="center">{{ registrationStep }} of 3</div>
+<div class="ui container">
+    <div class="ui two column centered grid">
+        <div class="row">
+            <div class="ui ordered steps">
+                <div class="{{#iff registrationStep '>' 1}} completed {{/iff}} step">
+                    <div class="content">
+                    <div class="title">Shipping</div>
+                    <div class="description">Choose your shipping options</div>
+                    </div>
+                </div>
+                <div class="{{#iff registrationStep '>' 2}} completed {{/iff}} step">
+                    <div class="content">
+                    <div class="title">Billing</div>
+                    <div class="description">Enter billing information</div>
+                    </div>
+                </div>
+                <div class="active step">
+                    <div class="content">
+                    <div class="title">Confirm Order</div>
+                    <div class="description">Verify order details</div>
+                    </div>
+                </div>
+            </div>
+            <div class="column">         
+                {{#iff registrationStep '===' 1}}
+                    <form class="ui form" method="POST">
+                        <input type="text" value="1" name="step"  hidden/>
+                        <div class="field">
+                            <label>First Name</label>
+                            <input type="text" value="{{userFilledData.firstName}}" name="firstName" placeholder="First Name">
+                            {{#if errors.firstName.message}}
+                                <div class="ui pointing red basic label">
+                                    {{errors.firstName.message}}
+                                </div>
+                            {{/if}}
+                        </div>
+                        <div class="field">
+                            <label>Last Name</label>
+                            <input type="text" value="{{userFilledData.lastName}}" name="lastName" placeholder="Last Name">
+                            {{#if errors.lastName.message}}
+                                <div class="ui pointing red basic label">
+                                    {{errors.lastName.message}}
+                                </div>
+                            {{/if}}
+                        </div>
+                        <div class="field">
+                            <label>Email</label>
+                            <input type="text" value="{{userFilledData.email}}" name="email" placeholder="Email">
+                            {{#if errors.email.message}}
+                                <div class="ui pointing red basic label">
+                                    {{errors.email.message}}
+                                </div>
+                            {{/if}}
+                        </div>
+                        <button class="ui button primary"  type="submit">Next</button>
+                    </form>
+                {{/iff}}
+
+                {{#iff registrationStep '===' 2}}
+                    <form class="ui form" method="POST">
+                        <input type="text" value="2" name="step"  hidden/>
+                        <div class="field">
+                            <label>Date of arrival</label>
+                            <input type="text" name="timeArrival">
+                        </div>
+                        <div class="field">
+                            <label>Date of departure</label>
+                            <input type="text" name="timeDeparture">
+                        </div>
+                        <div class="field">
+                            <label>Company name</label>
+                            <input type="text" name="companyName">
+                        </div>
+                        <div class="field">
+                            <label>Position in company</label>
+                            <input type="text" name="positionCompany">
+                        </div>
+                        <div class="field">
+                            <label>Role:</label>
+                            <select class="ui dropdown" name="role">
+                                <option value="listener">Listener</option>
+                                <option value="speaker">Speaker</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label>Sex:</label>
+                            <select class="ui dropdown" name="sex">
+                                <option value="listener">Male</option>
+                                <option value="speaker">Female</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label>Birthdate:</label>
+                            <input type="text" name="birthdate">
+                        </div>
+                        <div class="field">
+                            <label>Country:</label>
+                            <input type="text" name="country">
+                        </div>
+                        <a class="ui button red" href="/event/registration?step=1">Back</a>
+                        <button class="ui button primary" type="submit">Next</button>
+                    </form>
+                {{/iff}}
+
+                {{#iff registrationStep '===' 3}}
+                    {{userFilledData.firstName}} {{userFilledData.lastName}}
+                    Регистрация прошла успешно.
+                    На ваш email {{userFilledData.email}} было отправлено письмо о подтверждении регистрации.
+                {{/iff}}
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/js/datepicker.min.js"></script>
+<script type="text/javascript"
+    src="https://cdn.jsdelivr.net/npm/country-select-js@2.0.1/build/js/countrySelect.min.js"></script>
+
+
+<script type="text/javascript">
+    $(` input[name="timeDeparture"]`).datepicker({});
+    $(`input[name="timeArrival"]`).datepicker({});
+
+
+
+    $('input[name="birthdate"]').datepicker({});
+    $('input[name="country"]').countrySelect();
+</script>
+</body>
+
+</html>
