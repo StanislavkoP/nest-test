@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { NewPersonRegistration } from './intefaces/newPerson.interface';
 import { registrationAtEventDto } from './event.dto';
 import { validate } from 'class-validator';
+import { plainToClass } from 'class-transformer';
 
 @Injectable()
 export class EventService {
@@ -69,12 +70,7 @@ export class EventService {
     }
 
     async validateStep(payload) {
-        let step = new registrationAtEventDto();
-        for (const key in payload) {
-            if (payload.hasOwnProperty(key)) {
-                step[key] = payload[key]
-            }
-        }
+        const step = plainToClass(registrationAtEventDto, payload);
         
         return await validate(step).then((errors) => {
             const errorList = {}

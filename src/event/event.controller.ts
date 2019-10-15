@@ -14,12 +14,11 @@ export class EventController {
     @Post('/registration')
     @Render('index')
     async registerNewPerson(@Body() newPersonRegistration: registrationAtEventDto, @Res() res: Response) {
+        const errors = await this.eventService.validateStep(newPersonRegistration);
         const {
             step,
 
         } = newPersonRegistration;
-
-        const errors = await this.eventService.validateStep(newPersonRegistration);
         console.log(errors)
         if (Object.keys(errors).length > 0) {
             return {

@@ -1,12 +1,12 @@
 import {registerDecorator, ValidationOptions, ValidatorConstraint, ValidatorConstraintInterface, ValidationArguments} from "class-validator";
 import { parse, isDate } from 'date-fns';
 
-@ValidatorConstraint({ async: true })
+@ValidatorConstraint()
 class IsDateStringCustomConstraint implements ValidatorConstraintInterface {
     validate(date: any, args: ValidationArguments) {
         const parsedDate = parse(date, 'dd.MM.yyyy', new Date());
-        console.log(isDate(parsedDate))
-        if (parsedDate && isDate(parsedDate)) {
+
+        if (parsedDate.toString() !== 'Invalid Date' && isDate(parsedDate)) {
             return true;
         } else {
             return false
@@ -21,8 +21,8 @@ export function IsDateStringCustom(validationOptions?: ValidationOptions) {
             target: object.constructor,
             propertyName: propertyName,
             options: validationOptions,
-            validator: IsDateStringCustomConstraint,
             constraints: [],
+            validator: IsDateStringCustomConstraint,
         });
     };
  }

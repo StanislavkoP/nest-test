@@ -1,25 +1,21 @@
 {{> header }}
-<div align="center">{{ registrationStep }} of 3</div>
 <div class="ui container">
     <div class="ui two column centered grid">
         <div class="row">
             <div class="ui ordered steps">
                 <div class="{{#iff registrationStep '>' 1}} completed {{/iff}} step">
                     <div class="content">
-                    <div class="title">Shipping</div>
-                    <div class="description">Choose your shipping options</div>
+                        <div class="title">Step one</div>
                     </div>
                 </div>
                 <div class="{{#iff registrationStep '>' 2}} completed {{/iff}} step">
                     <div class="content">
-                    <div class="title">Billing</div>
-                    <div class="description">Enter billing information</div>
+                        <div class="title">Step two</div>
                     </div>
                 </div>
                 <div class="active step">
                     <div class="content">
-                    <div class="title">Confirm Order</div>
-                    <div class="description">Verify order details</div>
+                        <div class="title">Completed</div>
                     </div>
                 </div>
             </div>
@@ -27,7 +23,7 @@
                 {{#iff registrationStep '===' 1}}
                     <form class="ui form" method="POST">
                         <input type="text" value="1" name="step"  hidden/>
-                        <div class="field">
+                        <div class="field {{#if errors.firstName.message}} error {{/if}}">
                             <label>First Name</label>
                             <input type="text" value="{{userFilledData.firstName}}" name="firstName" placeholder="First Name">
                             {{#if errors.firstName.message}}
@@ -36,7 +32,7 @@
                                 </div>
                             {{/if}}
                         </div>
-                        <div class="field">
+                        <div class="field {{#if errors.lastName.message}} error {{/if}}">
                             <label>Last Name</label>
                             <input type="text" value="{{userFilledData.lastName}}" name="lastName" placeholder="Last Name">
                             {{#if errors.lastName.message}}
@@ -45,7 +41,7 @@
                                 </div>
                             {{/if}}
                         </div>
-                        <div class="field">
+                        <div class="field {{#if errors.email.message}} error {{/if}}">
                             <label>Email</label>
                             <input type="text" value="{{userFilledData.email}}" name="email" placeholder="Email">
                             {{#if errors.email.message}}
@@ -61,43 +57,95 @@
                 {{#iff registrationStep '===' 2}}
                     <form class="ui form" method="POST">
                         <input type="text" value="2" name="step"  hidden/>
-                        <div class="field">
+                        <div class="field {{#if errors.timeArrival.message}} error {{/if}}">
                             <label>Date of arrival</label>
-                            <input type="text" name="timeArrival">
+                            <input type="text" name="timeArrival" value="{{userFilledData.timeArrival}}">
+                            {{#if errors.timeArrival.message}}
+                                <div class="ui pointing red basic label">
+                                    {{errors.timeArrival.message}}
+                                </div>
+                            {{/if}}
                         </div>
-                        <div class="field">
+                        <div class="field {{#if errors.timeDeparture.message}} error {{/if}}">
                             <label>Date of departure</label>
-                            <input type="text" name="timeDeparture">
+                            <input type="text" name="timeDeparture" value="{{userFilledData.timeDeparture}}">
+                            {{#if errors.timeDeparture.message}}
+                                <div class="ui pointing red basic label">
+                                    {{errors.timeDeparture.message}}
+                                </div>
+                            {{/if}}
                         </div>
-                        <div class="field">
+                        <div class="field {{#if errors.companyName.message}} error {{/if}}">
                             <label>Company name</label>
-                            <input type="text" name="companyName">
+                            <input type="text" name="companyName" value="{{userFilledData.companyName}}">
+                            {{#if errors.companyName.message}}
+                                <div class="ui pointing red basic label">
+                                    {{errors.companyName.message}}
+                                </div>
+                            {{/if}}
                         </div>
-                        <div class="field">
+                        <div class="field {{#if errors.positionCompany.message}} error {{/if}}">
                             <label>Position in company</label>
-                            <input type="text" name="positionCompany">
+                            <input type="text" name="positionCompany" value="{{userFilledData.positionCompany}}">
+                            {{#if errors.positionCompany.message}}
+                                <div class="ui pointing red basic label">
+                                    {{errors.positionCompany.message}}
+                                </div>
+                            {{/if}}
                         </div>
-                        <div class="field">
+                        <div class="field {{#if errors.role.message}} error {{/if}}">
                             <label>Role:</label>
                             <select class="ui dropdown" name="role">
-                                <option value="listener">Listener</option>
-                                <option value="speaker">Speaker</option>
+                                {{#if errors.role.message }}
+                                    <option value="">--Please choose an option--</option>
+                                {{else}}
+                                    <option value="{{userFilledData.role}}" hidden="hidden" selected="selected">{{userFilledData.role}}</option>
+                                    <option value="">--Please choose an option--</option>
+                                {{/if}}
+                                <option value="Listener">Listener</option>
+                                <option value="Speaker">Speaker</option>
                             </select>
+                            {{#if errors.role.message}}
+                                <div class="ui pointing red basic label">
+                                    {{errors.role.message}}
+                                </div>
+                            {{/if}}
                         </div>
-                        <div class="field">
+                        <div class="field {{#if errors.sex.message}} error {{/if}}">
                             <label>Sex:</label>
                             <select class="ui dropdown" name="sex">
-                                <option value="listener">Male</option>
-                                <option value="speaker">Female</option>
+                                {{#if errors.sex.message }}
+                                    <option value="">--Please choose an option--</option>
+                                {{else}}
+                                    <option value="{{userFilledData.sex}}" hidden="hidden" selected="selected">{{userFilledData.sex}}</option>
+                                    <option value="">--Please choose an option--</option>
+                                {{/if}}
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
                             </select>
+                            {{#if errors.sex.message}}
+                                <div class="ui pointing red basic label">
+                                    {{errors.sex.message}}
+                                </div>
+                            {{/if}}
                         </div>
-                        <div class="field">
+                        <div class="field {{#if errors.birthdate.message}} error {{/if}}">
                             <label>Birthdate:</label>
-                            <input type="text" name="birthdate">
+                            <input type="text" name="birthdate" value="{{userFilledData.birthdate}}">
+                            {{#if errors.birthdate.message}}
+                                <div class="ui pointing red basic label">
+                                    {{errors.birthdate.message}}
+                                </div>
+                            {{/if}}
                         </div>
-                        <div class="field">
+                        <div class="field {{#if errors.country.message}} error {{/if}}">
                             <label>Country:</label>
-                            <input type="text" name="country">
+                            <input type="text" name="country" value="{{userFilledData.country}}">
+                            {{#if errors.country.message}}
+                                <div class="ui pointing red basic label">
+                                    {{errors.country.message}}
+                                </div>
+                            {{/if}}
                         </div>
                         <a class="ui button red" href="/event/registration?step=1">Back</a>
                         <button class="ui button primary" type="submit">Next</button>
@@ -105,9 +153,10 @@
                 {{/iff}}
 
                 {{#iff registrationStep '===' 3}}
-                    {{userFilledData.firstName}} {{userFilledData.lastName}}
-                    Регистрация прошла успешно.
-                    На ваш email {{userFilledData.email}} было отправлено письмо о подтверждении регистрации.
+                    <div>
+                        {{userFilledData.firstName}} {{userFilledData.lastName}},
+                        registration completed successfully.
+                   <div>A confirmation email was sent to your email <strong>{{userFilledData.email}}.</strong></div>
                 {{/iff}}
             </div>
         </div>
