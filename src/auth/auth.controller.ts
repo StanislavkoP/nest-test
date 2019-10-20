@@ -1,6 +1,6 @@
 import { Get, Controller, Render, Post, UseGuards, Res, Req } from "@nestjs/common";
 import { Request, Response } from 'express';
-import { LoginGuard } from "./login.guard";
+import { LoginGuard } from "./auth.guard";
 
 @Controller('/login')
 export class AuthController {

@@ -1,20 +1,42 @@
-{{>header }}
-<div class="ui container">
-    <form class="ui form" method="POST">
-    <div class="field">
-        <label>Login</label>
-        <input type="text" name="username" placeholder="Login">
-    </div>
-    <div class="field">
-        <label>Password</label>
-        <input type="text" name="password" placeholder="Password">
-    </div>
-    <button class="ui button" type="submit">Submit</button>
-    </form>
-</div>
-{{!-- <script>
-    const myName = prompt("login:")
-    const myAge = prompt("password:")
-    
+{{>header}}
+<div class="container">
+    <div class="columns is-flex is-vcentered is-centered">
+        <div class="column is-half">
+            <form class="" method="POST">
+                <div class="field">
+                    <label class="label">Login</label>
+                    <div class="control has-icons-left has-icons-right">
+                        <input class="input" type="text" placeholder="Login" name="username">
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-envelope"></i>
+                        </span>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Password</label>
+                    <div class="control has-icons-left has-icons-right">
+                        <input class="input" type="password" placeholder="Password" name="password">
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-key"></i>
+                        </span>
+                    </div>
+                </div>
 
-</script> --}}
+                <div class="control is-fullwidth">
+                    <button class="button is-link is-rounded is-fullwidth ">Submit</button>
+                </div>
+            </form>
+            {{#if message}}
+            <article class="message is-danger is-small">
+                <div class="message-body">
+                    {{message}}
+                </div>
+            </article>
+            {{/if}}
+        </div>
+    </div>
+</div>
+
+
+
+<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>

@@ -4,7 +4,6 @@ import { UserModule } from '../user/user.module';
 import { PassportModule } from '@nestjs/passport';
 import { LocalStrategy } from './jwt.strategy';
 import { SessionSerializer } from './session.serializer';
-import { AuthenticatedGuard } from './login.guard';
 import { AuthController } from './auth.controller';
 
 @Module({

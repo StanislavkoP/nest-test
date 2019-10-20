@@ -1,11 +1,7 @@
 import { Controller, Post, Body, Get, Res, HttpStatus, UsePipes, SetMetadata, UseGuards, UseInterceptors, Render, Req, Param, Query, ValidationPipe } from '@nestjs/common';
-import { NewPersonRegistration } from './dto/event.dto';
-import { EventService } from './event.service';
-import { Response, Request } from 'express';
-import { JoiValidationPipe } from './event.validation';
-import { Roles, RolesGuard } from '../roles.guard';
-import { LoggingInterceptor } from '../interceptors/logging.interceptor.interceptor';
 import { registrationAtEventDto } from './event.dto';
+import { EventService } from './event.service';
+import { Response } from 'express';
 
 @Controller('event')
 export class EventController {
@@ -19,7 +15,7 @@ export class EventController {
             step,
 
         } = newPersonRegistration;
-        console.log(errors)
+
         if (Object.keys(errors).length > 0) {
             return {
                 registrationStep: parseInt(step),

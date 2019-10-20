@@ -1,12 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { NewPersonRegistration } from './intefaces/newPerson.interface';
 import { registrationAtEventDto } from './event.dto';
 import { validate } from 'class-validator';
 import { plainToClass } from 'class-transformer';
 
 @Injectable()
 export class EventService {
-    private readonly _registeredPersons: NewPersonRegistration[] = [];
+    private readonly _registeredPersons: registrationAtEventDto[] = [];
     private _registeringPerson = {
         firstName: '',
         lastName: '',
@@ -22,7 +21,7 @@ export class EventService {
     };
     private _completedStep: number = 1;
 
-    registeringNewPerson(person: NewPersonRegistration) {
+    registeringNewPerson(person: registrationAtEventDto) {
         this._registeringPerson = {
             ...this._registeringPerson,
             ...person,

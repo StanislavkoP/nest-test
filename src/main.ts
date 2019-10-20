@@ -5,6 +5,7 @@ import { join } from 'path';
 import { AppModule } from './app.module';
 import * as hbs from 'hbs';
 import * as passport from 'passport';
+const flash = require('connect-flash');
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
@@ -53,7 +54,8 @@ async function bootstrap() {
 
   app.use(passport.initialize());
   app.use(passport.session());
- 
+  app.use(flash());
+  
   await app.listen(3000);
 }
 bootstrap();
