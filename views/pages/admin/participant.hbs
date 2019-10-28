@@ -1,0 +1,226 @@
+{{>header}}
+
+<div class="container">
+    <div class="columns is-centered">
+        <div class="column is-half">
+
+            <form class="ui form" method="POST">
+                <div class="field {{#if errors.firstName.message}} error {{/if}}">
+                    <label class="label">First Name</label>
+                    <div class="control">
+                        <input class="input " type="text" value="{{participant.firstName}}" name="firstName"
+                            placeholder="First Name">
+                    </div>
+                    {{#if errors.firstName.message}}
+                    <div class="ui pointing red basic label">
+                        {{errors.firstName.message}}
+                    </div>
+                    {{/if}}
+                </div>
+                <div class="field {{#if errors.lastName.message}} error {{/if}}">
+                    <label class="label">Last Name</label>
+                    <div class="control">
+                        <input class="input " type="text" value="{{participant.lastName}}" name="lastName"
+                            placeholder="Last Name">
+                    </div>
+                    {{#if errors.lastName.message}}
+                    <div class="ui pointing red basic label">
+                        {{errors.lastName.message}}
+                    </div>
+                    {{/if}}
+                </div>
+                <div class="field {{#if errors.email.message}} error {{/if}}">
+                    <label class="label">Email</label>
+                    <div class="control">
+                        <input class="input " type="text" value="{{participant.email}}" name="email"
+                            placeholder="Email">
+                    </div>
+                    {{#if errors.email.message}}
+                    <div class="ui pointing red basic label">
+                        {{errors.email.message}}
+                    </div>
+                    {{/if}}
+                </div>
+
+                <div class="field {{#if errors.timeArrival.message}} error {{/if}}">
+                    <label class="label">Date of arrival</label>
+                    <div class="control">
+                        <input class="input " type="text" name="timeArrival" value="{{participant.timeArrival}}">
+                    </div>
+                    {{#if errors.timeArrival.message}}
+                    <div class="ui pointing red basic label">
+                        {{errors.timeArrival.message}}
+                    </div>
+                    {{/if}}
+                </div>
+                <div class="field {{#if errors.timeDeparture.message}} error {{/if}}">
+                    <label class="label">Date of departure</label>
+                    <div class="control">
+                        <input class="input " type="text" name="timeDeparture" value="{{participant.timeDeparture}}">
+                    </div>
+                    {{#if errors.timeDeparture.message}}
+                    <div class="ui pointing red basic label">
+                        {{errors.timeDeparture.message}}
+                    </div>
+                    {{/if}}
+                </div>
+                <div class="field {{#if errors.companyName.message}} error {{/if}}">
+                    <label class="label">Company name</label>
+                    <div class="control">
+                        <input class="input " type="text" name="companyName" value="{{participant.companyName}}">
+                    </div>
+                    {{#if errors.companyName.message}}
+                    <div class="ui pointing red basic label">
+                        {{errors.companyName.message}}
+                    </div>
+                    {{/if}}
+                </div>
+                <div class="field {{#if errors.positionCompany.message}} error {{/if}}">
+                    <label class="label">Position in company</label>
+                    <div class="control">
+                        <input class="input " type="text" name="positionCompany"
+                            value="{{participant.positionCompany}}">
+                    </div>
+                    {{#if errors.positionCompany.message}}
+                    <div class="ui pointing red basic label">
+                        {{errors.positionCompany.message}}
+                    </div>
+                    {{/if}}
+                </div>
+                <div class="field {{#if errors.role.message}} error {{/if}}">
+                    <label class="label">Role:</label>
+                    <div class="select">
+                        <select name="role">
+                            {{#if errors.role.message }}
+                            <option value="">--Please choose an option--</option>
+                            {{else}}
+                            <option value="{{participant.role}}" hidden="hidden" selected="selected">
+                                {{participant.role}}
+                            </option>
+                            <option value="">--Please choose an option--</option>
+                            {{/if}}
+                            <option value="Listener">Listener</option>
+                            <option value="Speaker">Speaker</option>
+                        </select>
+                    </div>
+                    {{#if errors.role.message}}
+                    <div class="ui pointing red basic label">
+                        {{errors.role.message}}
+                    </div>
+                    {{/if}}
+                </div>
+                <div class="field {{#if errors.sex.message}} error {{/if}}">
+                    <label class="label">Sex:</label>
+                    <div class="select">
+                        <select name="sex">
+                            {{#if errors.sex.message }}
+                            <option value="">--Please choose an option--</option>
+                            {{else}}
+                            <option value="{{participant.sex}}" hidden="hidden" selected="selected">{{participant.sex}}
+                            </option>
+                            <option value="">--Please choose an option--</option>
+                            {{/if}}
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
+                    {{#if errors.sex.message}}
+                    <div class="ui pointing red basic label">
+                        {{errors.sex.message}}
+                    </div>
+                    {{/if}}
+                </div>
+                <div class="field {{#if errors.birthdate.message}} error {{/if}}">
+                    <label class="label">Birthdate:</label>
+                    <div class="control">
+                        <input class="input " type="text" name="birthdate" value="{{participant.birthdate}}">
+                    </div>
+                    {{#if errors.birthdate.message}}
+                    <div class="ui pointing red basic label">
+                        {{errors.birthdate.message}}
+                    </div>
+                    {{/if}}
+                </div>
+                <div class="field {{#if errors.country.message}} error {{/if}}">
+                    <label class="label">Country:</>
+                        <div class="control">
+                            <input class="input " type="text" name="country" value="{{participant.country}}">
+                        </div>
+                        {{#if errors.country.message}}
+                        <div class="ui pointing red basic label">
+                            {{errors.country.message}}
+                        </div>
+                        {{/if}}
+                </div>
+                <div class="field {{#if errors.status.message}} error {{/if}}">
+                    <label class="label">Role:</label>
+                    <div class="select">
+                        <select name="status">
+                            {{#if errors.status.message }}
+                                <option value="">--Please choose an option--</option>
+                            {{else}}
+                            <option value="{{participant.status}}" hidden="hidden" selected="selected">
+                                {{participant.status}}
+                            </option>
+                            <option value="">--Please choose an option--</option>
+                            {{/if}}
+                            <option value="New">New</option>
+                            <option value="Approved">Approved</option>
+                            <option value="Declined">Declined</option>
+                        </select>
+                    </div>
+                    {{#if errors.role.message}}
+                    <div class="ui pointing red basic label">
+                        {{errors.role.message}}
+                    </div>
+                    {{/if}}
+                </div>
+
+                <div class="field is-grouped" style="justify-content: center">
+                    <p class="control">
+                        <a class="button is-danger is-rounded" href="/admin/participants">
+                            Cancel
+                        </a>
+                    </p>
+                    <p class="control">
+                        <button class="button is-link is-rounded" type="submit">
+                            Save changes
+                        </button>
+                    </p>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/js/datepicker.min.js"></script>
+<script type="text/javascript"
+    src="https://cdn.jsdelivr.net/npm/country-select-js@2.0.1/build/js/countrySelect.min.js"></script>
+
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/js/datepicker.min.js"></script>
+<script type="text/javascript"
+    src="https://cdn.jsdelivr.net/npm/country-select-js@2.0.1/build/js/countrySelect.min.js"></script>
+
+
+<script type="text/javascript">
+    $(` input[name="timeDeparture"]`).datepicker({});
+    $(`input[name="timeArrival"]`).datepicker({});
+
+
+
+    $('input[name="birthdate"]').datepicker({});
+    $('input[name="country"]').countrySelect();
+</script>
+
+</body>
+
+</html>

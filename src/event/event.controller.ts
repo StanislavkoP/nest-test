@@ -26,13 +26,15 @@ export class EventController {
             }
         }
 
-        
-
         this.eventService.registeringNewPerson(newPersonRegistration);
         this.eventService.step = parseInt(step);
         
         const userFilledData = this.eventService.registeringPersonData;
         const registrationStep = this.eventService.step;
+
+        if (registrationStep) {
+            this.eventService.saveRegisretingPerson(userFilledData);
+        }
 
         return {
             registrationStep: registrationStep + 1,
@@ -58,7 +60,8 @@ export class EventController {
     
 
     @Get('/person/registered')
-    getRegisteredListPerson(@Res() res: Response) {
-        res.status(HttpStatus.OK).json([])
+    async getRegisteredListPerson(@Res() res: Response) {
+        const participens = await this.eventService.getAllParticipants();
+        res.status(HttpStatus.OK).json(participens)
     }
 }

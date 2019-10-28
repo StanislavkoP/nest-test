@@ -22,6 +22,7 @@ export class LoginGuard extends AuthGuard('local') {
 export class AuthenticatedGuard implements CanActivate {
   async canActivate(context: ExecutionContext) {
     const request = context.switchToHttp().getRequest();
+
     return request.isAuthenticated();
   }
 }

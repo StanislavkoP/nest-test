@@ -7,11 +7,14 @@ import { User } from "../user/user.service";
 @Injectable()
 export class LocalStrategy extends PassportStrategy(Strategy) {
     constructor(private readonly authService: AuthService) {
-        super();
+        super({
+            usernameField: 'email',
+            passwordField: 'password',
+          });
     }
 
-    async validate(username, password): Promise<User | undefined> {
-        const user : User = await this.authService.validateUser(username, password);
+    async validate(email, password): Promise<User | undefined> {
+        const user : User = await this.authService.validateUser(email, password);
         if (!user) {
             throw new UnauthorizedException("This user doesn't exist");
         }

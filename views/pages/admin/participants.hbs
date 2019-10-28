@@ -1,0 +1,33 @@
+{{>header}}
+<table class="table">
+    <thead>
+        <tr>
+            <th></th>
+            <th>id</th>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Company name</th>
+            <th>Position</th>
+            <th>Country</th>
+            <th>Email</th>
+            <th>Registration date</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each participants}}
+            <tr>
+                <th><a href="/admin/participants/{{id}}">Edit</a></th>
+                <th>{{ id }}</th>
+                <td>{{ firstName }}</td>
+                <td>{{ lastName }}</td>
+                <td>{{ companyName }}</td>
+                <td>{{ positionCompany }}</td>
+                <td>{{ country }}</td>
+                <td>{{ email }}</td>
+                <td>{{ createdAt }}</td>
+                <td>{{ status }}</td>
+            </tr>
+        {{/each}}
+    </tbody>
+</table>

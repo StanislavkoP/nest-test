@@ -1,1 +1,12 @@
+{{>header}}
 Admin page {{ user.role }}
+
+<aside class="menu">
+  <ul class="menu-list">
+    <li><a href="admin/users">Users</a></li>
+
+    {{#iff user.role '===' 'superadmin'}}
+        <li><a href="admin/participants">Participants</a></li>
+    {{/iff}}
+  </ul>
+</aside>

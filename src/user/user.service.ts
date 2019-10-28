@@ -1,4 +1,7 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { UserRepository } from './user.repository';
+import { createAdminDto } from 'src/admin/admin.dto';
 
 export type User = {
   userId: Number,
@@ -11,7 +14,10 @@ export type User = {
 export class UserService {
     private readonly users: User[];
     
-    constructor() {
+    constructor(
+      // @InjectRepository(UserRepository)
+      // private readonly userRepository: UserRepository
+    ) {
         this.users = [
           {
             userId: 1,
@@ -37,4 +43,14 @@ export class UserService {
     async findOne(username: string): Promise<User | undefined> {
         return this.users.find(user => user.username === username)
     }
+
+    getAllUsers() {
+      return this.users
+    }
+
+    // createAdmin(createAdminDto: createAdminDto) {
+    //   const {email, password} = createAdminDto;
+
+    //   const admin = new createAdminDto();
+    // }
 }

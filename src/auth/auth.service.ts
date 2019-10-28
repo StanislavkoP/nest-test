@@ -7,8 +7,7 @@ import { AuthLoginDto } from './auth.dto';
 @Injectable()
 export class AuthService {
     constructor(
-        private readonly usersService: UserService,
-        // private readonly jwtService: JwtService
+        private readonly usersService: UserService
     ) {}
 
     validatePayload(payload) {
@@ -32,11 +31,4 @@ export class AuthService {
         return null
     }
 
-    // public async login(user: any) {
-    //     const payload = { username: user.username, sub: user.userId, password: user.password };
-    //     return {
-    //         access_token:  this.jwtService.sign(payload)
-    //     }
-       
-    // }
 }

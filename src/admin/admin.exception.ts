@@ -1,15 +1,21 @@
-import { Catch, HttpException, ExceptionFilter, ArgumentsHost, ForbiddenException } from "@nestjs/common";
-
+import { Catch, HttpException, ExceptionFilter, ArgumentsHost, ForbiddenException, UnauthorizedException } from "@nestjs/common";
+import { Request, Response } from 'express';
 @Catch(HttpException)
-export class AuthExceptionFilter implements ExceptionFilter {
+export class AdminAuthExceptionFilter implements ExceptionFilter {
     catch(exception: HttpException, host: ArgumentsHost) {
         const ctx = host.switchToHttp();
-        const response = ctx.getResponse();
-        const request = ctx.getRequest();
-        const status = exception.getStatus();
+        const response = ctx.getResponse<Response>();
+        const request = ctx.getRequest<Request>();
 
-        if (status === 401 || 403) response.redirect('/admin/login')
+        console.log(request)
 
-        return true
+        if (
+            exception instanceof UnauthorizedException ||
+            exception instanceof ForbiddenException
+        ) {
+            response.redirect('/admin/login');
+        }
+
+        return true;
     }
 }

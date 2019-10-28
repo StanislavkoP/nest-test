@@ -1,10 +1,18 @@
 import { Injectable } from '@nestjs/common';
-import { registrationAtEventDto } from './event.dto';
+import { registrationAtEventDto, createAtEventDto } from './event.dto';
 import { validate } from 'class-validator';
 import { plainToClass } from 'class-transformer';
+import { Event } from './event.entity';
+import { InjectRepository } from '@nestjs/typeorm';
+import { EventRepository } from './event.repository';
 
 @Injectable()
 export class EventService {
+    constructor(
+        @InjectRepository(EventRepository)
+        private readonly eventRepository: EventRepository
+    ) {}
+
     private readonly _registeredPersons: registrationAtEventDto[] = [];
     private _registeringPerson = {
         firstName: '',
@@ -26,6 +34,12 @@ export class EventService {
             ...this._registeringPerson,
             ...person,
         }
+    }
+
+    async saveRegisretingPerson(personDataDto: createAtEventDto) {
+        const registeredPerson = plainToClass(Event, personDataDto);
+        
+        await registeredPerson.save()
     }
 
     set step (step) {
@@ -88,5 +102,26 @@ export class EventService {
 
             return errorList
         })
+    } 
+
+    async getAllParticipants() {
+        return await this.eventRepository.find();
+    }
+
+    async findOneParticipant(id: number) {
+        return await this.eventRepository.findOne(id);
+    }
+
+    async updateParticipant(id: number, updatedParticipant: createAtEventDto) {
+        const participant = await this.findOneParticipant(id);
+
+        if (participant) {
+            return this.eventRepository.save({
+                ...participant,
+                ...updatedParticipant
+            })
+        }
+
+        return undefined;
     }
 }
