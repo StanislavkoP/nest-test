@@ -7,8 +7,6 @@ export class AdminAuthExceptionFilter implements ExceptionFilter {
         const response = ctx.getResponse<Response>();
         const request = ctx.getRequest<Request>();
 
-        console.log(request)
-
         if (
             exception instanceof UnauthorizedException ||
             exception instanceof ForbiddenException

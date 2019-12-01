@@ -1,6 +1,18 @@
-import { IsEmail, IsString } from "class-validator";
+import { IsEmail, IsString, IsBoolean } from "class-validator";
 
-export class createAdminDto {
+export class deleteAdminDto {
+    @IsBoolean()
+    deleted: boolean;
+
+}
+
+export class createAdminDto extends deleteAdminDto {
+    @IsEmail()
+    firstName: string;
+
+    @IsEmail()
+    lastName: string;
+
     @IsEmail()
     email: string;
 

@@ -1,0 +1,70 @@
+{{>header}}
+{{>sidebar}}
+<div class="container">
+    <div class="columns is-centered">
+        <div class="column is-half">
+            <form class="ui form" method="POST">
+                <div class="field {{#if errors.firstName.message}} error {{/if}}">
+                    <label class="label">First Name</label>
+                    <div class="control">
+                        <input class="input " type="text" value="{{admin.firstName}}" name="firstName"
+                            placeholder="First Name">
+                    </div>
+                    {{#if errors.firstName.message}}
+                    <div class="ui pointing red basic label">
+                        {{errors.firstName.message}}
+                    </div>
+                    {{/if}}
+                </div>
+                <div class="field {{#if errors.lastName.message}} error {{/if}}">
+                    <label class="label">Last Name</label>
+                    <div class="control">
+                        <input class="input " type="text" value="{{admin.lastName}}" name="lastName"
+                            placeholder="Last Name">
+                    </div>
+                    {{#if errors.lastName.message}}
+                    <div class="ui pointing red basic label">
+                        {{errors.lastName.message}}
+                    </div>
+                    {{/if}}
+                </div>
+                <div class="field {{#if errors.email.message}} error {{/if}}">
+                    <label class="label">Email</label>
+                    <div class="control">
+                        <input class="input " type="text" value="{{admin.email}}" name="email"
+                            placeholder="Email">
+                    </div>
+                    {{#if errors.email.message}}
+                    <div class="ui pointing red basic label">
+                        {{errors.email.message}}
+                    </div>
+                    {{/if}}
+                </div>
+                <div class="field {{#if errors.password.message}} error {{/if}}">
+                    <label class="label">Password</label>
+                    <div class="control">
+                        <input class="input" type="text" value="{{admin.password}}" name="password"  placeholder="Password">
+                    </div>
+                    {{#if errors.password.message}}
+                    <div class="ui pointing red basic label">
+                        {{errors.password.message}}
+                    </div>
+                    {{/if}}
+                </div>
+
+                <div class="field is-grouped" style="justify-content: center">
+                    <p class="control">
+                        <a class="button is-danger is-rounded" href="/admin/participants">
+                            Cancel
+                        </a>
+                    </p>
+                    <p class="control">
+                        <button class="button is-link is-rounded" type="submit">
+                            Save changes
+                        </button>
+                    </p>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

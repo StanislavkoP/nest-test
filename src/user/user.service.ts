@@ -44,7 +44,7 @@ export class UserService {
         return this.users.find(user => user.username === username)
     }
 
-    getAllUsers() {
+    async getAllUsers() {
       return this.users
     }
 

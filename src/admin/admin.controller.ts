@@ -1,4 +1,4 @@
-import { Controller, Get, Render, UseGuards, Post, Req, UseFilters, Res, Param, Body } from '@nestjs/common';
+import { Controller, Get, Render, UseGuards, Post, Req, UseFilters, Res, Param, Body, Delete } from '@nestjs/common';
 import { Request, Response, response } from 'express';
 import { AuthExceptionFilter } from '../auth/auth.exception';
 import { LoginGuard, AuthenticatedGuard } from '../auth/auth.guard';
@@ -16,7 +16,6 @@ import { createAtEventDto } from '../event/event.dto';
 export class AdminController {
     constructor(
         private readonly adminService: AdminService,
-        private readonly userService: UserService,
         private readonly eventService: EventService
     ) {}
 
@@ -49,18 +48,99 @@ export class AdminController {
 
     @Get('users')
     @Render('pages/admin/users')
-    usersPage(@Res() res: Response, @Req() req: Request) {
-        const users = this.userService.getAllUsers()
+    @UseGuards(AuthenticatedGuard)
+    @UseFilters(AdminAuthExceptionFilter)
+    async adminList(@Res() res: Response, @Req() req: Request) {
+        const user = req.user as Admin;
+        const admins = await this.adminService.findAll(user.id);
 
-        return res.json(users)
+        return { admins, user }
+    }
+
+    @Get('users/user/:userId')
+    @Render('pages/admin/user')
+    @UseGuards(AuthenticatedGuard)
+    @UseFilters(AdminAuthExceptionFilter)
+    async editUserPage(@Res() res: Response, @Req() req: Request, @Param('userId') userId) {
+        const user = req.user as Admin;
+        const admin = await this.adminService.findOne(userId);
+
+        if(!admin) {
+            return res.status(404).json({error: "User not found"})
+        }
+        return { admin, user }
+    }
+
+    @Post('users/user/:userId')
+    @Render('pages/admin/user')
+    @UseGuards(AuthenticatedGuard)
+    @UseFilters(AdminAuthExceptionFilter)
+    async editUser(@Res() res: Response, @Req() req: Request, @Param('userId') userId, @Body() userData: createAdminDto) {
+        const user = req.user as Admin;
+        const updatedAdmin = await this.adminService.updateUser(userId, userData);
+        console.log(updatedAdmin)
+        if(updatedAdmin.affected > 0) {
+            return { admin: userData, user }
+        } else {
+            return res.status(404).json({error: "User not found"})
+        }
+        
+    }
+
+    @Post('users/user/:userId/delete')
+    @UseGuards(AuthenticatedGuard)
+    @UseFilters(AdminAuthExceptionFilter)
+    async deleteUser(@Res() res: Response, @Req() req: Request, @Param('userId') userId) {
+        const deletedUser = await this.adminService.deleteUser(userId);
+
+        if(deletedUser.affected > 0) {
+            return res.redirect('/admin/users');
+        } else {
+            return res.status(404).json({error: "User not found"})
+        }
+        
+    }
+
+    @Post('users/user/:userId/recovery')
+    @UseGuards(AuthenticatedGuard)
+    @UseFilters(AdminAuthExceptionFilter)
+    async recoveryUser(@Res() res: Response, @Req() req: Request, @Param('userId') userId) {
+        const updatedAdmin = await this.adminService.updateUser(userId, { deleted: false });
+
+        if(updatedAdmin.affected > 0) {
+            return res.redirect('/admin/users');
+        } else {
+            return res.status(404).json({error: "User not found"})
+        }
+        
+    }
+
+
+    @Get('users/new')
+    @Render('pages/admin/user')
+    @UseGuards(AuthenticatedGuard)
+    @UseFilters(AdminAuthExceptionFilter)
+    createUserPage(@Res() res: Response, @Req() req: Request) {
+        return {}
+    }
+
+    @Post('users/new')
+    @Render('pages/admin/user')
+    @UseGuards(AuthenticatedGuard)
+    @UseFilters(AdminAuthExceptionFilter)
+    async createUser(@Res() res: Response, @Req() req: Request, @Body() userData: createAdminDto) {
+        const createdUser =  await this.adminService.createUser(userData);
+        console.log(createdUser)
+        return { admin: createdUser }
     }
 
     @Get('participants')
     @Render('pages/admin/participants')
     async participantsPage(@Res() res: Response, @Req() req: Request) {
         const participants = await this.eventService.getAllParticipants()
-        console.log(participants)
-        return {  participants }
+        const user = req.user as Admin;
+
+        return {  participants, user }
     }
 
     @Get('participants/:id')

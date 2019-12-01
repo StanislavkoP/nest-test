@@ -22,6 +22,6 @@ import { EventModule } from '../event/event.module';
     EventModule,
   ],
   controllers: [AdminController],
-  providers: [AdminService, UserService, SessionSerializer, AdminLocalStrategy,],
+  providers: [AdminService, UserService, SessionSerializer, AdminLocalStrategy],
 })
 export class AdminModule {}

@@ -6,11 +6,20 @@ export class Admin extends BaseEntity {
     id: number;
 
     @Column()
+    firstName: string;
+
+    @Column()
+    lastName: string;
+
+    @Column()
     email: string;
 
     @Column()
     password: string;
 
-    @Column()
+    @Column({ default: false })
+    deleted: boolean;
+
+    @Column({ default: "admin" })
     role: string;
 }

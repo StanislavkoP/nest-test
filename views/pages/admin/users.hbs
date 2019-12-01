@@ -1,1 +1,67 @@
-Users
+{{>header}}
+{{>sidebar}}
+<table class="table">
+    <thead>
+        <tr>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Email</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each admins}}
+            <tr>
+                <td>
+                    {{#if firstName}}
+                        {{firstName}}
+                    {{else}}
+                        No first name
+                    {{/if}}
+                </td>
+                <td>
+                    {{#if lastName}}
+                        {{lastName}}
+                    {{else}}
+                        No last name
+                    {{/if}}
+                </td>
+                <td>
+                    {{#if email}}
+                        {{email}}
+                    {{else}}
+                        No email
+                    {{/if}}
+                </td>
+
+               <th>
+                    {{#if deleted}}
+                        <form method="POST" action="/admin/users/user/{{id}}/recovery">
+                            <button class="button is-link">Recovery</button>
+                        </form>
+                    {{else}}
+                        <a class="button is-link" href="/admin/users/user/{{id}}">Edit</a>
+                    {{/if}}
+                </th>
+
+                <th>
+                    <form method="POST" action="/admin/users/user/{{id}}/delete">
+                        <button class="button is-danger">
+                            {{#if deleted}}
+                                Delete for all life
+                            {{else}}
+                                Delete
+                            {{/if}}
+                        </button>
+                    </form>
+                </th>
+            </tr>
+        {{/each}}
+    </tbody>
+</table>
+<div class="container">
+    <a href="/admin/users/new" class="button is-link is-rounded">
+        Add new user
+    </a>
+</div>

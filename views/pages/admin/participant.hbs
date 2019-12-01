@@ -1,9 +1,8 @@
 {{>header}}
-
+{{>sidebar}}
 <div class="container">
     <div class="columns is-centered">
         <div class="column is-half">
-
             <form class="ui form" method="POST">
                 <div class="field {{#if errors.firstName.message}} error {{/if}}">
                     <label class="label">First Name</label>
@@ -200,16 +199,6 @@
     src="https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/js/datepicker.min.js"></script>
 <script type="text/javascript"
     src="https://cdn.jsdelivr.net/npm/country-select-js@2.0.1/build/js/countrySelect.min.js"></script>
-
-
-<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-<script type="text/javascript"
-    src="https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/js/datepicker.min.js"></script>
-<script type="text/javascript"
-    src="https://cdn.jsdelivr.net/npm/country-select-js@2.0.1/build/js/countrySelect.min.js"></script>
-
 
 <script type="text/javascript">
     $(` input[name="timeDeparture"]`).datepicker({});
