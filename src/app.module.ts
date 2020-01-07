@@ -5,11 +5,10 @@ import { UserModule } from './user/user.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { EventModule } from './event/event.module';
-import { TypeOrmModule } from '@nestjs/typeorm'
-import { typOrmConfig } from './config/typeorm.config';
+import { DatabaseModule } from './config/database/database.module';
 
 @Module({
-  imports: [ TypeOrmModule.forRoot(typOrmConfig), AdminModule, AuthModule, UserModule, EventModule],
+  imports: [ DatabaseModule, AdminModule, AuthModule, UserModule, EventModule],
   providers: [AppService],
   controllers: [AppController]
 })
