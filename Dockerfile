@@ -2,9 +2,9 @@ FROM node:10-alpine
 
 WORKDIR /usr/src/app
 
-COPY package*.json ./
+COPY . .
 RUN npm install
 
-COPY . .
 
-CMD [ "npm", "start:dev" ]
+EXPOSE 3030
+CMD [ "npm", 'run', "start:dev" ]

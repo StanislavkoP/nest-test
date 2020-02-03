@@ -15,8 +15,8 @@ export class UserService {
     private readonly users: User[];
     
     constructor(
-      // @InjectRepository(UserRepository)
-      // private readonly userRepository: UserRepository
+      @InjectRepository(UserRepository)
+      private readonly userRepository: UserRepository
     ) {
         this.users = [
           {

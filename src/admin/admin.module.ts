@@ -10,6 +10,7 @@ import { PassportModule } from '@nestjs/passport';
 import { SessionSerializer } from '../auth/session.serializer';
 import { AdminLocalStrategy } from './admin.local.strategy';
 import { EventModule } from '../event/event.module';
+import { UserRepository } from 'src/user/user.repository';
 
 @Module({
   imports: [
@@ -18,10 +19,11 @@ import { EventModule } from '../event/event.module';
       defaultStrategy: 'local',
       session: true,
     }),
+    UserModule,
     AuthModule,
     EventModule,
   ],
   controllers: [AdminController],
-  providers: [AdminService, UserService, SessionSerializer, AdminLocalStrategy],
+  providers: [AdminService, SessionSerializer, AdminLocalStrategy]
 })
 export class AdminModule {}
