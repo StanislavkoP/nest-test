@@ -19,17 +19,18 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js --config src/config/typeorm.config.ts",
-    "typeorm:migrate": "yarn typeorm migration:generate -n PostRefactoring",
-    "typeorm:run": "yarn typeorm migration:run",
+    "typeorm:migrate": "npm run typeorm migration:generate -- -n",
+    "typeorm:run": "npm run typeorm migration:run",
+    
     "run:services": "docker-compose up && exit 0"
   },
   "dependencies": {
     "@hapi/joi": "^16.1.4",
-    "@nestjs/common": "^6.11.5",
-    "@nestjs/core": "^6.11.5",
+    "@nestjs/common": "^6.11.6",
+    "@nestjs/core": "^6.11.6",
     "@nestjs/jwt": "^6.1.1",
     "@nestjs/passport": "^6.1.1",
-    "@nestjs/platform-express": "^6.11.5",
+    "@nestjs/platform-express": "^6.11.6",
     "@nestjs/typeorm": "^6.2.0",
     "@types/connect-flash": "0.0.35",
     "air-datepicker": "^2.2.3",

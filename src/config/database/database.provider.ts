@@ -6,8 +6,7 @@ import { IENV } from '../env/env.interface';
 export const databaseProviders: Provider[] = [
     {
         provide: 'DBConnectionToken',
-        useFactory: async (env: IENV) => {
-            return createConnection({
+        useFactory: async (env: IENV) => await createConnection({
                 type: 'postgres',
                 host: env.DB_HOST,
                 port: env.DB_PORT,
@@ -23,8 +22,7 @@ export const databaseProviders: Provider[] = [
                 cli: {
                   migrationsDir: 'src/migrations',
                 },
-            })
-        },
+            }),
         inject: [IENV]
     }
 ]
