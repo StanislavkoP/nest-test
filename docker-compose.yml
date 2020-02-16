@@ -1,9 +1,9 @@
 version: "3.7"
 services:
     main:
-        container_name:  mainsd
+        container_name: app-nest
         build: .
-        image: "node:10-alpine"
+        image: "node:12"
         tty: true
         working_dir: /usr/app
         volumes: 
@@ -11,24 +11,3 @@ services:
         command: "npm run start:dev"
         ports:
             - 3000:3000
-        networks:
-            - webnet
-        depends_on:
-            - postgres
-    postgres:
-        container_name: postgres
-        image: postgres:latest
-        environment: 
-            - POSTGRES_USER=postgres
-            - POSTGRES_PASSWORD=admin
-            - POSTGRES_DB=test
-        ports:
-            - '5432:5432'
-        volumes:
-            - ./db/initdb.sh:/docker-entrypoint-initdb.sh
-        networks:
-            - webnet
-networks:
-    webnet:
-volumes:
-    pgdata:

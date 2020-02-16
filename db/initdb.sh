@@ -1,4 +1,8 @@
-CREATE USER postgres;
+#!/bin/bash
+set -e
 
-CREATE DATABASE test;
-GRANT ALL PRIVILEGES ON DATABASE test TO postgres;
+psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-EOSQL
+    CREATE USER postgres;
+    CREATE DATABASE test;
+    GRANT ALL PRIVILEGES ON DATABASE test TO postgres;
+EOSQL

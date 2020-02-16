@@ -1,8 +1,4 @@
-import { TypeOrmModuleOptions } from "@nestjs/typeorm";
-
-type TypeOrmModuleOptionsExtended = TypeOrmModuleOptions & { seeds: [string]; };
-
-const OrmConfig: TypeOrmModuleOptionsExtended = {
+module.exports = {
     type: 'postgres',
     host: 'postgres',
     port: 5432,
@@ -10,7 +6,7 @@ const OrmConfig: TypeOrmModuleOptionsExtended = {
     password: 'admin',
     database: 'test',
     entities: [__dirname + '/../**/*.entity.{js,ts}'],
-    synchronize: true,
+    synchronize: false,
     migrationsRun: true,
     logging: true,
     logger: 'file',
@@ -22,5 +18,3 @@ const OrmConfig: TypeOrmModuleOptionsExtended = {
       migrationsDir: 'src/migrations',
     },
 }
-
-export = OrmConfig;

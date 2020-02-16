@@ -52,6 +52,8 @@ export class AdminService {
     async logIn(adminAuthCredentialDto: adminAuthCredentialDto) {
         const { email, password } = adminAuthCredentialDto;
 
+        console.log(adminAuthCredentialDto)
+
         const admin = this.adminRepository.findOne({ where : { email, password }})
 
         return admin;
